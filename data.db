@@ -1,0 +1,41 @@
+CREATE TABLE `users` (
+	`id` LINESTRING NOT NULL UNIQUE,
+	`username` LINESTRING,
+	`role` LINESTRING,
+	PRIMARY KEY(`id`)
+);
+
+
+CREATE TABLE `Projects` (
+	`id` LINESTRING NOT NULL UNIQUE,
+	`name` LINESTRING,
+	`employe_count` INTEGER,
+	`departament_id` LINESTRING,
+	PRIMARY KEY(`id`)
+);
+
+
+CREATE TABLE `employes` (
+	`id` LINESTRING NOT NULL UNIQUE,
+	`departament_id` LINESTRING,
+	`is_manager` BOOLEAN,
+	`has_depedent` BOOLEAN,
+	`name` LINESTRING,
+	PRIMARY KEY(`id`)
+);
+
+
+CREATE TABLE `departament` (
+	`id` LINESTRING NOT NULL UNIQUE,
+	`name` LINESTRING,
+	`manager_string` LINESTRING,
+	PRIMARY KEY(`id`)
+);
+
+
+ALTER TABLE `Projects`
+ADD FOREIGN KEY(`departament_id`) REFERENCES `departament`(`id`)
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE `departament`
+ADD FOREIGN KEY(`manager_string`) REFERENCES `employes`(`id`)
+ON UPDATE NO ACTION ON DELETE NO ACTION;
